@@ -13,11 +13,12 @@ Stars stars;
 void setup () {
   //fullScreen();
   size(800, 600);
+  colorMode(HSB);
   gravity = new PVector(0.0, 0.15);
   wind = new PVector(0.01, 0);
   flares.add(new Flare((width/2), (height+10)));
 
-  background(0, 0, 24);
+  background(190, 255, 30); // dark blue in HSB
   stars = new Stars(200);
 }
 
@@ -39,11 +40,10 @@ void draw () {
       shoots.get(i).show();
     }
   }
-  if (random(1) < 0.02) {
+  if (random(1) < 0.03) {
     flares.add(new Flare(random(width), (height+10)));
   }
   if (random(1) < 0.005) {
     shoots.add(new Shooting());
   }
-  println(shoots.size());
 }

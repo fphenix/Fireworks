@@ -1,4 +1,4 @@
-// Fred Limouzin //<>//
+// Fred Limouzin //<>// //<>//
 // march 2017
 
 class Particule {
@@ -41,6 +41,16 @@ class Particule {
       // Star
     case 7:
       this.vel = this.makeStar(random(0, 2*PI)).copy();
+      this.vel.mult(1.0);
+      break;
+      // Butterfly
+    case 8:
+      this.vel = this.makeButterfly(random(0, 2*PI)).copy();
+      this.vel.mult(1.0);
+      break;
+      // Clover
+    case 9:
+      this.vel = this.makeClover(random(0, 2*PI)).copy();
       this.vel.mult(1.0);
       break;
       // random
@@ -101,6 +111,22 @@ class Particule {
     PVector ret = this.makeTriangle(angle);
     ny = (floor(random(2)) > 0) ? ret.y : 2-ret.y;
     return (new PVector(ret.x, ny));
+  }
+
+  PVector makeButterfly (float angle) {
+    float r, x, y;
+    r = sin(2*angle);
+    x = r * cos(angle);
+    y = r * sin(angle);
+    return (new PVector(x, y));
+  }
+
+  PVector makeClover (float angle) {
+    float r, x, y;
+    r = cos(3*angle);
+    x = r * cos(angle);
+    y = r * sin(angle);
+    return (new PVector(x, y));
   }
 
   PVector makeFlower (float angle) {

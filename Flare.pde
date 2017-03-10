@@ -46,6 +46,7 @@ class Flare {
     for (int i = 0; i < this.nbParticules; i++) {
       this.exploPart.add(new Particule(this.pos, this.scl, this.c, this.typeShape));
     }
+    this.exploded = true;
   }
 
   void updateChildren () {
@@ -60,6 +61,8 @@ class Flare {
   void noTail () {
     for (int i = (this.tail.size()-1); i >= 0; i--) {
       this.tail.remove(i);
+      //    if (this.tail.size() > 0) {
+      //      this.tail.remove(0);
     }
   }
 
@@ -89,8 +92,8 @@ class Flare {
       this.vel.mult(0.995); // friction
     } else if (!this.exploded) {
       this.explode();
+    } else if (this.exploded) {
       this.noTail();
-      this.exploded = true;
     }
     this.acc.mult(0);
     this.updateChildren();
