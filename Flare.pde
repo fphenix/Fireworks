@@ -20,7 +20,7 @@ class Flare {
   Flare (float tx, float ty) {
     float minNbPart = 200;
     float maxNbPart = 300;
-    this.typeShape = int(random(9));
+    this.typeShape = int(random(12));
     this.pos = new PVector(tx, ty);
     this.vel = new PVector(0, (-1.0 * random(10.0, 15.0)));
     this.acc = new PVector(0, 0);
