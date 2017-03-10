@@ -19,12 +19,12 @@ class Flare {
 
   Flare (float tx, float ty) {
     float minNbPart = 200;
-    float maxNbPart = 400;
+    float maxNbPart = 300;
     this.typeShape = int(random(9));
     this.pos = new PVector(tx, ty);
-    this.vel = new PVector(0, (-1.0 * random(6.0, 10.0)));
+    this.vel = new PVector(0, (-1.0 * random(10.0, 15.0)));
     this.acc = new PVector(0, 0);
-    this.scl = random(1, 4);
+    this.scl = random(2, 5);
     this.nbParticules = int(random(minNbPart, maxNbPart));
     this.active = true;
     this.reachedTop = false;
@@ -84,9 +84,9 @@ class Flare {
       }
       this.applyForce(gravity);
       this.applyForce(wind);
-      this.vel.mult(0.999); // friction
       this.vel.add(this.acc);
       this.pos.add(this.vel);
+      this.vel.mult(0.995); // friction
     } else if (!this.exploded) {
       this.explode();
       this.noTail();

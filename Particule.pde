@@ -13,44 +13,44 @@ class Particule {
   Particule (PVector tpos, float tscl, color tc, int ttype) {
     this.pos = tpos.copy();
     switch (ttype) {
-    // circular
+      // circular
     case 0:
       this.vel = PVector.random2D();
       break;
-    //heart
+      //heart
     case 1:
       this.vel = this.makeHeart(random(0, 2*PI)).copy();
-      this.vel.mult(1.0/20);
+      this.vel.mult(1.1);
       break;
-    //square #1
+      //square #1
     case 2:
       this.vel = this.makeSquare1(random(0, 2*PI)).copy();
       break;
-    // flower
+      // flower
     case 3:
       this.vel = this.makeFlower(random(0, 2*PI)).copy();
       this.vel.mult(1.0/3.0);
       break;
-    // Triangle
+      // Triangle
     case 4:
       this.vel = this.makeTriangle(random(0, 2*PI)).copy();
       this.vel.mult(1.0);
       break;
-    // Star
+      // Star
     case 5:
       this.vel = this.makeStar(random(0, 2*PI)).copy();
       this.vel.mult(1.0);
       break;
-    //random
+      //random
     default : 
       this.vel = PVector.random2D();
-      this.vel.mult(random(0.1, 0.8));
+      this.vel.mult(random(0.05, 1.1));
     }
 
     this.acc = new PVector(0, 0);
     this.scl = random(tscl);
     this.lifespan = 255.0;
-    this.lifestep = random(2.0, 4.0);
+    this.lifestep = random(1.0, 5.0);
     this.c = tc;
   }
 
@@ -58,11 +58,11 @@ class Particule {
     //x  =  16.sin^3(t) ; y  =  13.cos(t)-5.cos(2t)-2.cos(3t)-cos(4t).
     float x, y, temp;
     temp = sin(angle);
-    x = 16*temp*temp*temp;
-    y = 13*cos(1.0*angle);
-    y -= 5*cos(2.0*angle);
-    y -= 2*cos(3.0*angle);
-    y -=   cos(4.0*angle);
+    x = 1.6*temp*temp*temp;
+    y  = 1.3*cos(1.0*angle);
+    y -= 0.5*cos(2.0*angle);
+    y -= 0.2*cos(3.0*angle);
+    y -= 0.1*cos(4.0*angle);
     return (new PVector(x, -y));
     // other function:
     // x from -2 to 2
@@ -121,9 +121,10 @@ class Particule {
   }
 
   void update () {
+    float friction = 1.0-((5.0-this.scl)/600.0);
     this.applyForce(gravity);
     this.applyForce(wind);
-    this.vel.mult(0.995); // friction
+    this.vel.mult(friction); // friction
     this.vel.add(this.acc);
     this.pos.add(this.vel);
     this.acc.mult(0);
