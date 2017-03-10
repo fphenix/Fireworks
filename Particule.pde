@@ -29,7 +29,7 @@ class Particule {
       // flower
     case 3:
       this.vel = this.makeFlower(random(0, 2*PI)).copy();
-      this.vel.mult(1.0/3.0);
+      this.vel.mult(1.0/2.0);
       break;
       // Triangle
     case 4:
